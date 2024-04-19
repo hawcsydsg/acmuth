@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对话互动</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: url(../images/2.jpg) no-repeat;
+            background-size: 100%;
+        }
+
+        .dialog {
+            width: 100%;
+            height: 100px;
+            background: rgba(251, 136, 140, 0.384);
+            position: absolute;
+            bottom: 0;
+        }
+
+        .dialog .pic {
+            width: 60px;
+            height: 60px;
+            background: url(../img/1.jpg) no-repeat;
+            background-size: 100%;
+            display: inline-block;
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            border-radius: 5px;
+        }
+
+        .dialog .innerBox {
+            width: 90%;
+            height: 80px;
+            border: 2px solid #dcc0a5;
+            opacity: 0.8;
+            left: 85px;
+            top: 10px;
+            position: absolute;
+            border-radius: 5px;
+            font-family: 微软雅黑;
+            color: #fff;
+            text-shadow: 1px -1px 1px #333;
+            padding: 2px;
+        }
+
+        .dialog .innerBox #content {
+            margin: 2px 10px 10px 10px;
+            width: 95%;
+            height: 99%;
+            line-height: 25px;
+            overflow: hidden;
+            font-size: 20px;
+            text-align: justify;
+        }
+
+        .options {
+            text-align: center;
+            margin-top: 30%;
+            margin-left: 70%;
+            display: none;
+        }
+
+        .option {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            background-color: rgba(136, 180, 251, 0.5);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='dialog'>
+        <span class='pic'></span>
+        <div id='innerBox' class='innerBox'>
+            <div id='content'></div>
+        </div>
+    </div>
+    <div id="options" class="options">
+        <div class="option">以下哪个选项是正确的</div><br />
+        <div class="option" onclick="window.location.href='http://example.com/link2';">A、3.122</div>
+        <div class="option" onclick="window.location.href='烟花.html';">B、3.132</div>
+        <div class="option" onclick="window.location.href='http://example.com/link4';">C、3.142</div>
+        <div class="option" onclick="window.location.href='http://example.com/link5';">D、3.152</div>
+    </div>
+    <script>
+        var gameDialog = function (id, text, speed) {
+            var box = document.getElementById(id);
+            var len = text.length;
+            var timer = null;
+            var index = 0;
+            var character = '';
+            var options = document.getElementById("options");
+
+            function start() {
+                box.innerHTML = '';
+                options.style.display = "none"; // 重新开始时隐藏选项框
+                timer = setInterval(function () {
+                    if (box.scrollHeight > box.clientHeight) {
+                        character = text.charAt(index - 1);
+                        clearInterval(timer);
+                        showOptions();
+                        return;
+                    }
+                    if (index == len) {
+                        clearInterval(timer);
+                        showOptions(); // 文本展示完显示选项框
+                        return;
+                    }
+
+                    if (character) {
+                        box.innerHTML += character;
+                        character = '';
+                    } else {
+                        box.innerHTML += text.charAt(index++);
+                    }
+                }, speed);
+            }
+
+            function showOptions() {
+                options.style.display = "block";
+            }
+
+            start();
+
+            box.onclick = function () {
+                start();
+            }
+        }
+        window.onload = function () {
+            var text = "我踏入一座古老的庭院，只见一位长须飘飘、神情专注的老者正在石桌上推算着什么。他身着素净的长袍，腰间系着一条宽大的布带，整个人透着一股儒雅之气。阳光透过树梢的缝隙洒落在他身上，为他那专注的面庞镀上一层金色的光辉。我轻手轻脚地走近，生怕打扰了这位沉浸在数学世界中的智者。我拱手行礼，恭敬地问道：“这位莫非就是名满天下的祖冲之先生？” 祖冲之抬起头，眼中闪过一丝惊讶，随即露出和煦的笑容“正是在下。不知阁下有何事相询？”他的声音平和而有力，仿佛带着一种穿透时空的魔力。 我兴奋地回答：“我对您的圆周率研究一直深感敬佩。在您的时代，是如何将圆周率计算的如此精确的呢？” 祖冲之微微一笑，捋了捋胡须，眼中闪烁着智慧的光芒：“吾之计算，乃是基于前人研究之基石，但更在于不断尝试与修正。吾曾日夜推算，借助算筹与几何图形，力求逼近那神秘的真相。”他一边说着，一边指着石桌上的算筹和图纸，图纸上面写道，“圆周率之近似值，乃得之于圆周与径之比也。法曰：以正多边形之边数n递增，逼近圆之周，乃得π之近似。其式云：π约等于周长除以直径，亦即n倍之正弦π除以n之值。其中，n乃正多边形之边数，π即圆周率之近似数也。”那些复杂的数字和图形仿佛都在诉说着他曾经的奋斗与坚持。我好奇地追问：“在研究过程中，您有没有遇到特别棘手的问题？是如何克服的呢？”祖冲之叹了口气，眼中闪过一丝回忆的色彩：“的确，计算过程中遇到了诸多难题。有时数日不得进展，心中甚是苦闷。但吾坚信，只要心志坚定，终会找到答案。于是，吾反复研究，尝试不同的方法，终于在一次次的失败中找到了突破口。”他的话语中充满了坚韧不拔的精神和对真理的执着追求。我感叹不已：“您的毅力与智慧，真是令人佩服。您的研究对后世产生了深远的影响，您知道吗？”祖冲之眼中闪过一丝自豪：“吾虽不知后世之事，但能为数学研究贡献绵薄之力，已足矣。”他的话语中透露出一种淡泊名利、只求真理的学者风范。我充满好奇地继续问：“祖冲之先生，若我能为您展现后世的数学成就，您会有何感想呢？”祖冲之的脸上露出了几分好奇与期待：“哦？后世数学又有何新的突破与发现？”我兴奋地描述起来：“在后世的数百年间，数学领域取得了巨大的进步。圆周率的计算已经超越了您当年的成就，达到了前所未有的精度。人们发明了更精确的算法和工具，让圆周率的计算变得更加准确和高效。此外，代数、几何、概率论等多个分支都得到了深入的发展，新的理论和发现层出不穷。”我越说越激动：“不仅如此，数学的应用也广泛到了各个领域。从物理学到工程学，从经济学到计算机科学，数学的力量无处不在。它帮助我们揭示自然界的奥秘，推动科技的进步，为人类的文明发展作出了巨大的贡献。”祖冲之听后，眼中闪烁着惊喜的光芒：“真乃奇迹也！吾虽有所成就，但后世学者能超越吾辈，将数学推向新的高度，实乃幸事。”他仿佛看到了自己心血所系的数学在后世得到了更好的发展和传承，心中满是欣慰与自豪。我补充道：“而且，后世对数学的研究还在继续深入。新的理论、新的方法层出不穷，数学的世界仿佛永无止境。人们不断探索未知领域，挑战数学的极限，让数学的魅力更加璀璨夺目。”祖冲之听后，长叹一声：“数学之美，无穷无尽。看到后世学者不断追求真理，不断创新突破，吾心甚慰。吾虽不能亲自见证这一切，但能通过你的描述，略窥一二，已足矣。”他的话语中透露出一种跨越时空的欣慰与满足。此时，一阵微风吹过，庭院中的树叶轻轻摇曳，仿佛也在为这位古代数学家的成就和后世的发展而欢欣鼓舞。我默默地站在一旁，感受着这位伟大数学家的智慧和情怀，心中充满了对数学的敬畏和对未来的期待。仿佛在这一刻，我与祖冲之的心灵有了奇妙的交汇，共同沉浸在数学的奇妙世界中。请结合祖冲之图纸上推演的公式，计算正24边形对应的圆周率。（提示sin7.5°=0.1305）";
+            gameDialog("content", text, 20);
+        };
+    </script>
+</body>
+
+</html>

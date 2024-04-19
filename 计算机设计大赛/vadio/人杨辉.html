@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数学家</title>
+    <link rel="stylesheet" href="../css/人物.css">
+</head>
+
+<body>
+    <div class="shell">
+        <div class="daohang">
+            <nav>
+                <ul>
+                    <li><a href="../主网页.html">首页</a></li>
+                    <li><a href="数学家.html" style="color: red; opacity: 0.8;">数学家</a></li>
+                    <li><a href="著作.html">著作</a></li>
+                    <li><a href="联系我们.html">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+        <header>
+            <div class="img"></div>
+        </header>
+        <div class="main">
+            <main>
+                <article>
+                    <div class="multicol">
+                        <h1>杨辉</h1>
+                        <h3>(yang hui) </h3><br><br>
+                        <p>
+                            字谦光，汉族，钱塘（今浙江省杭州）人，南宋杰出的数学家。
+                            他曾担任过南宋地方行政官员，为政清廉，足迹遍及苏杭一带。他在总结民间乘除捷算法、“垛积术”、纵横图以及数学教育方面，均做出了重大的贡献。
+                            他是世界上第一个排出丰富的纵横图和讨论其构成规律的数学家。还曾论证过弧矢公式，时人称为“辉术”。
+                            与秦九韶、李冶、朱世杰并称“宋元数学四大家”。
+                        </p>
+                    </div>
+                    <img src="../images/张丘建1.jpg" alt="">
+                    <div class="multicol">
+                        <h2>主要成就:</h2>
+                        <p> 杨辉是世界上第一个系统研究纵横图（即杨辉三角）构成规律的数学家。纵横图是一种由数字排列而成的三角形图形，它的每一个数都等于位于它上方的两个数之和。
+                            杨辉详细研究了纵横图的性质和规律，并总结出了杨辉三角的递推关系。他发现，每一行的数值可以通过上一行的数值运算得到，这种递推关系被称为杨辉恒等式。这一发现
+                            在代数学中具有重要意义，为后来人们探索组合数学和概率论提供了基础。
+                            此外，杨辉还发现了纵横图中的一些特殊性质，如斜线和对称性。这些性质不仅美观，而且对于解决数学问题和数值计算具有实际意义。
+                            垛积术是杨辉对民间乘除捷算法进行总结和推广的成果之一。它是一种利用垛（即数字的排列）来进行乘法和除法运算的技巧。
+                            以乘法为例，垛积术可以简化复杂的乘法运算过程，使之更加高效。杨辉提出了一种将乘法问题转化为多次加法问题的方法，通过将数字排列成垛的形式，利用垛的不同进行相应的加法运算，最终得到乘法的结果。
+                            对于除法，杨辉发展了一种通过垛的转置和减法运算来实现简便除法的方法。这种方法不仅提高了计算速度，也使得除法运算更加直观易懂。
+
+                        </p>
+                    </div><img src="../images/张丘建1.jpg" alt="">
+                    <div class="multicol">
+                        <h2>主要作品：</h2>
+                        <p>《详解九章算法》、《日用算法》、《乘除通变本末》、《田亩比类乘除捷法》和《续古摘奇算法》。</p>
+                    </div>
+                    <div class="back" style="text-align: right;">
+                        <a href="" style="text-decoration: none;">返回顶部</a>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        const header = document.querySelector('header');
+        const img = document.querySelector('.img');
+        let scrollDistance = 0;
+        let requestId = null;
+        function updateHeaderClipPath() {
+            const clipPathValue = `polygon(0 0, 100% 0%, 100% ${(scrollDistance <= 600) ? 100 - ((scrollDistance / 600) * 60) : 75}%, 0 100%)`;
+            header.style.clipPath = clipPathValue;
+            const scaleValue = 1 + ((scrollDistance / 600) * 1);
+            img.style.transform = `scale(${scaleValue})`;
+            const opacityValue = (scrollDistance / 600);
+        }
+        function scrollHandler(event) {
+            if (event.deltaY < 0) {
+                scrollDistance = Math.max(0, scrollDistance + event.deltaY);
+            } else {
+                scrollDistance = Math.min(600, scrollDistance + event.deltaY);
+            }
+            if (!requestId) {
+                requestId = window.requestAnimationFrame(() => {
+                    updateHeaderClipPath();
+                    requestId = null;
+                });
+            }
+        }
+        window.addEventListener('wheel', scrollHandler);
+    </script>
+</body>
+
+</html>

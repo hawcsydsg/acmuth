@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数学家</title>
+    <link rel="stylesheet" href="../css/人物.css">
+</head>
+
+<body>
+    <div class="shell">
+        <div class="daohang">
+            <nav>
+                <ul>
+                    <li><a href="../主网页.html">首页</a></li>
+                    <li><a href="数学家.html" style="color: red; opacity: 0.8;">数学家</a></li>
+                    <li><a href="著作.html">著作</a></li>
+                    <li><a href="联系我们.html">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+        <header>
+            <div class="img"></div>
+        </header>
+        <div class="main">
+            <main>
+                <article>
+                    <div class="multicol">
+                        <h1>汪莱</h1>
+                        <h3>(wang lai) </h3><br><br>
+                        <p>
+                            字孝婴，号衡斋，歙县瞻淇人。数学、天文、经学、训诂学、音韵学和乐律等都有很深造诣，尤以数学成就最著。
+                            嘉庆十一年（1806），为治理黄河水害，受命测量云梯关（今江苏淮安县东北200里）、六塘河入海口高程。嘉庆十二年，
+                            以优贡生入京，考取八旗官学教习，入史馆纂修《天文志》、《时宪志》。嘉庆十五年，调任池州郡石埭县训导，因廉洁自奉，
+                            尽心办学，卒于任上。池州郡守撰文勒碑于明伦堂，表彰汪莱的办学功绩。
+                        </p>
+                    </div>
+                    <img src="../images/张丘建1.jpg" alt="">
+                    <div class="multicol">
+                        <h2>主要成就:</h2>
+                        <p> 汪莱提出在求解方程时方程根不只有一正根，亦有负根，并设96道例题加以证明，是中国数学史上关于方程根研究的一个突破。汪莱对于其他诸如弧三角形、勾股形、
+                            平圆形、弧矢关系、代数方程理论等专题都著有详尽的阐述。汪莱终生不得志，但始终坚持治学,刻意求新，研究算学往往参用西法，其主要著述流传至今，使后世在二百
+                            年后的今天，还得以窥见其才华和风采。</p>
+                    </div><img src="../images/张丘建1.jpg" alt="">
+                    <div class="multicol">
+                        <h2>主要作品：</h2>
+                        <p>《衡斋算学》、《参两算经》、《校正九章算术》</p>
+                    </div>
+                    <div class="back" style="text-align: right;">
+                        <a href="" style="text-decoration: none;">返回顶部</a>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        const header = document.querySelector('header');
+        const img = document.querySelector('.img');
+        let scrollDistance = 0;
+        let requestId = null;
+        function updateHeaderClipPath() {
+            const clipPathValue = `polygon(0 0, 100% 0%, 100% ${(scrollDistance <= 600) ? 100 - ((scrollDistance / 600) * 60) : 75}%, 0 100%)`;
+            header.style.clipPath = clipPathValue;
+            const scaleValue = 1 + ((scrollDistance / 600) * 1);
+            img.style.transform = `scale(${scaleValue})`;
+            const opacityValue = (scrollDistance / 600);
+        }
+        function scrollHandler(event) {
+            if (event.deltaY < 0) {
+                scrollDistance = Math.max(0, scrollDistance + event.deltaY);
+            } else {
+                scrollDistance = Math.min(600, scrollDistance + event.deltaY);
+            }
+            if (!requestId) {
+                requestId = window.requestAnimationFrame(() => {
+                    updateHeaderClipPath();
+                    requestId = null;
+                });
+            }
+        }
+        window.addEventListener('wheel', scrollHandler);
+    </script>
+</body>
+
+</html>

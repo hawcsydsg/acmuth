@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数学家</title>
+    <link rel="stylesheet" href="../css/人物.css">
+</head>
+
+<body>
+    <div class="shell">
+        <div class="daohang">
+            <nav>
+                <ul>
+                    <li><a href="../主网页.html">首页</a></li>
+                    <li><a href="数学家.html" style="color: red; opacity: 0.8;">数学家</a></li>
+                    <li><a href="著作.html">著作</a></li>
+                    <li><a href="联系我们.html">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+        <header>
+            <div class="img"></div>
+        </header>
+        <div class="main">
+            <main>
+                <article>
+                    <div class="multicol">
+                        <h1>祖冲之</h1>
+                        <h3>(zu chong zhi) </h3><br><br>
+                        <p>
+                            祖冲之（429年-500年），字文远，生于丹阳郡建康县（今江苏南京），籍贯范阳郡遒县（今河北省保定市涞水县），南北朝时期数学家、天文学家、科学家。
+                            祖冲之从小就受到很好的家庭教育。爷爷给他讲“斗转星移”，父亲领他读经书典籍，家庭的熏陶，耳濡目染，加之自己的勤奋，使他对自然科学和文学、哲学，
+                            特别是天文学产生了浓厚的兴趣，在青年时代就有了博学的名声。
+                        </p>
+                    </div>
+                    <img src="../images/张丘建1.jpg" alt="">
+                    <div class="multicol">
+                        <h2>主要成就:</h2>
+                        <p> 祖冲之所撰的《缀术》一书，被收入《算经十书》，唐代将此书列入国子监教材，后因深奥而未得传。
+                            祖冲之发现的圆周率，在当时世界上最先进，这一纪录保持了千年，直到15世纪才由阿拉伯数学家卡西打破。</p>
+                    </div><img src="../images/张丘建1.jpg" alt="">
+                    <div class="multicol">
+                        <h2>主要作品：</h2><br>
+                        <p>《缀术》</p>
+                    </div>
+                    <div class="back" style="text-align: right;">
+                        <a href="" style="text-decoration: none;">返回顶部</a>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        const header = document.querySelector('header');
+        const img = document.querySelector('.img');
+        let scrollDistance = 0;
+        let requestId = null;
+        function updateHeaderClipPath() {
+            const clipPathValue = `polygon(0 0, 100% 0%, 100% ${(scrollDistance <= 600) ? 100 - ((scrollDistance / 600) * 60) : 75}%, 0 100%)`;
+            header.style.clipPath = clipPathValue;
+            const scaleValue = 1 + ((scrollDistance / 600) * 1);
+            img.style.transform = `scale(${scaleValue})`;
+            const opacityValue = (scrollDistance / 600);
+        }
+        function scrollHandler(event) {
+            if (event.deltaY < 0) {
+                scrollDistance = Math.max(0, scrollDistance + event.deltaY);
+            } else {
+                scrollDistance = Math.min(600, scrollDistance + event.deltaY);
+            }
+            if (!requestId) {
+                requestId = window.requestAnimationFrame(() => {
+                    updateHeaderClipPath();
+                    requestId = null;
+                });
+            }
+        }
+        window.addEventListener('wheel', scrollHandler);
+    </script>
+</body>
+
+</html>

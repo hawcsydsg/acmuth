@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Circle Cutting Game - Optimized</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #gameCanvas {
+            background-color: #f0f0f0;
+            border: 2px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <p id="piDisplay">模拟的圆周率值: </p>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const piDisplay = document.getElementById('piDisplay');
+        const radius = 150;
+        const center = { x: canvas.width / 2, y: canvas.height / 2 };
+
+        function drawCircle() {
+            ctx.beginPath();
+            ctx.arc(center.x, center.y, radius, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+
+        function drawPolygon(sides, radius) {
+            ctx.beginPath();
+            for (let i = 0; i < sides; i++) {
+                const a = 2 * Math.PI * i / sides;
+                ctx.lineTo(center.x + radius * Math.cos(a), center.y + radius * Math.sin(a));
+            }
+            ctx.closePath();
+            ctx.stroke();
+        }
+
+        function simulatePi(sides) {
+            const sideLength = 2 * radius * Math.sin(Math.PI / sides);
+            const perimeter = sides * sideLength;
+            const simulatedPi = perimeter / (2 * radius);
+            piDisplay.innerText = `模拟的圆周率值: ${simulatedPi.toFixed(5)}`;
+        }
+
+        canvas.addEventListener('click', function() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawCircle();
+
+            // 这里我们将使用随机数来简化“切割”逻辑，实际情况下需根据用户输入计算
+            const sides = Math.floor(Math.random() * (12 - 3)) + 3; // 随机3到12边形
+
+            drawPolygon(sides, radius);
+            simulatePi(sides);
+        });
+
+        drawCircle();
+    </script>
+</body>
+</html>

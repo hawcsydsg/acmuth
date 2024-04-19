@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数学家</title>
+    <link rel="stylesheet" href="../css/人物.css">
+</head>
+
+<body>
+    <div class="shell">
+        <div class="daohang">
+            <nav>
+                <ul>
+                    <li><a href="../主网页.html">首页</a></li>
+                    <li><a href="数学家.html" style="color: red; opacity: 0.8;">数学家</a></li>
+                    <li><a href="著作.html">著作</a></li>
+                    <li><a href="联系我们.html">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+        <header>
+            <div class="img"></div>
+        </header>
+        <div class="main">
+            <main>
+                <article>
+                    <div class="multicol">
+                        <h1>刘徽</h1>
+                        <h3>(liu hui) </h3><br><br>
+                        <p>
+                            （约225年—约295年），汉族，山东滨州邹平市人，魏晋期间伟大的数学家，中国古典数学理论的奠基人之一。刘徽思想敏捷，方法灵活，
+                            既提倡推理又主张直观。他是中国最早明确主张用逻辑推理的方式来论证数学命题的人。刘徽的一生是为数学刻苦探求的一生。他虽然地位低下，
+                            但人格高尚。他不是沽名钓誉的庸人，而是学而不厌的伟人，他给中华民族留下了宝贵的财富。
+                        </p>
+                    </div>
+                    <img src="../images/张丘建1.jpg" alt="">
+                    <div class="multicol">
+                        <h2>主要成就:</h2>
+                        <p> 算术和代数。刘徽首次使用了十进小数，并完善了齐同术。他明确提出了分数的基本性质，并对求最大公约数的方法进行了理论说明。他还研究了各种比例算法。
+                            几何学。刘徽提出了“割圆术”和几何定理的证明，研究了球体体积，并运用朴素的极限思想计算圆面积及圆周率。他还创造了“重差术”和“出入相补、以盈补虚”的原理。
+                            逻辑和推理。刘徽强调逻辑推理的重要性，并主张直观方法。他通过割圆术证明了圆面积的公式，并给出了计算圆周率的科学方法。他通过无限分割的
+                            方法解决了几何形、几何体的面积、体积计算问题，并提出了关于多面体体积计算的刘徽原理。他的工作不仅奠定了中国古典数学的理论基础，也对后世的数学家产生了深远的影响。</p>
+                    </div><img src="../images/张丘建1.jpg" alt="">
+                    <div class="multicol">
+                        <h2>主要作品：</h2><br>
+                        <p>《九章算术注》《海岛算经》</p>
+                    </div>
+                    <div class="back" style="text-align: right;">
+                        <a href="" style="text-decoration: none;">返回顶部</a>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        const header = document.querySelector('header');
+        const img = document.querySelector('.img');
+        let scrollDistance = 0;
+        let requestId = null;
+        function updateHeaderClipPath() {
+            const clipPathValue = `polygon(0 0, 100% 0%, 100% ${(scrollDistance <= 600) ? 100 - ((scrollDistance / 600) * 60) : 75}%, 0 100%)`;
+            header.style.clipPath = clipPathValue;
+            const scaleValue = 1 + ((scrollDistance / 600) * 1);
+            img.style.transform = `scale(${scaleValue})`;
+            const opacityValue = (scrollDistance / 600);
+        }
+        function scrollHandler(event) {
+            if (event.deltaY < 0) {
+                scrollDistance = Math.max(0, scrollDistance + event.deltaY);
+            } else {
+                scrollDistance = Math.min(600, scrollDistance + event.deltaY);
+            }
+            if (!requestId) {
+                requestId = window.requestAnimationFrame(() => {
+                    updateHeaderClipPath();
+                    requestId = null;
+                });
+            }
+        }
+        window.addEventListener('wheel', scrollHandler);
+    </script>
+</body>
+
+</html>

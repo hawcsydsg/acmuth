@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数学家</title>
+    <link rel="stylesheet" href="../css/人物.css">
+</head>
+
+<body>
+    <div class="shell">
+        <div class="daohang">
+            <nav>
+                <ul>
+                    <li><a href="../主网页.html">首页</a></li>
+                    <li><a href="数学家.html" style="color: red; opacity: 0.8;">数学家</a></li>
+                    <li><a href="著作.html">著作</a></li>
+                    <li><a href="联系我们.html">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+        <header>
+            <div class="img"></div>
+        </header>
+        <div class="main">
+            <main>
+                <article>
+                    <div class="multicol">
+                        <h1>秦久韶</h1>
+                        <h3>(qin jiu shao) </h3><br>
+                        <p>
+                            (1208年－1268年），字道古，汉族，祖籍鲁郡（今河南省范县），出生于普州（今四川安岳县）。南宋著名数学家，与李冶、杨辉、朱世杰并称宋元数学四大家。
+                            精研星象、音律、算术、诗词、弓、剑、营造之学，历任琼州知府、司农丞，后遭贬，卒于梅州任所，1247年完成著作《数书九章》，
+                        </p>
+                    </div>
+                    <img src="../images/张丘建1.jpg" alt="">
+                    <div class="multicol">
+                        <h2>主要成就:</h2>
+                        <p> 他创立了大衍求一术（中国剩余定理），这一成就比西方的高斯早554年提出。
+                            创立了正负开方术，系统解决了高次方程组的解法，这一成就比西方霍纳的相应成就早572年。
+                            提出了一元三次方程的求根公式，比西方的卡尔丹诺早四百多年。
+                            改进了线性方程组的解法，与现代的加减消元法相一致，这一成就比西方学者早312年。
+                            完善了十进制小数法，首次用小数表示无理根的近似值。
+                            提出了与海伦公式等价的三斜求积共识。
+                            创立了秦九韶算法，这一算法在多项式求值问题上具有轰动性，是计算机算法的底层原理之一。
+                        </p>
+                    </div><img src="../images/张丘建1.jpg" alt="">
+                    <div class="multicol">
+                        <h2>主要作品：</h2>
+                        <p>《数书九章》</p>
+                    </div>
+                    <div class="back" style="text-align: right;">
+                        <a href="" style="text-decoration: none;">返回顶部</a>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        const header = document.querySelector('header');
+        const img = document.querySelector('.img');
+        let scrollDistance = 0;
+        let requestId = null;
+        function updateHeaderClipPath() {
+            const clipPathValue = `polygon(0 0, 100% 0%, 100% ${(scrollDistance <= 600) ? 100 - ((scrollDistance / 600) * 60) : 75}%, 0 100%)`;
+            header.style.clipPath = clipPathValue;
+            const scaleValue = 1 + ((scrollDistance / 600) * 1);
+            img.style.transform = `scale(${scaleValue})`;
+            const opacityValue = (scrollDistance / 600);
+        }
+        function scrollHandler(event) {
+            if (event.deltaY < 0) {
+                scrollDistance = Math.max(0, scrollDistance + event.deltaY);
+            } else {
+                scrollDistance = Math.min(600, scrollDistance + event.deltaY);
+            }
+            if (!requestId) {
+                requestId = window.requestAnimationFrame(() => {
+                    updateHeaderClipPath();
+                    requestId = null;
+                });
+            }
+        }
+        window.addEventListener('wheel', scrollHandler);
+    </script>
+</body>
+
+</html>

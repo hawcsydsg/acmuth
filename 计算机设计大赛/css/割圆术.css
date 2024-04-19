@@ -1,0 +1,22 @@
+#magicSquare {
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+#magicSquare td {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border: 1px solid #000;
+}
+
+#magicSquare input {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+}
